@@ -2,8 +2,6 @@ import "./App.css";
 import ExpenseItem from "./components/ExpenseItem";
 
 function App() {
-
-
   const expenses = [
     {
       id: "e1",
