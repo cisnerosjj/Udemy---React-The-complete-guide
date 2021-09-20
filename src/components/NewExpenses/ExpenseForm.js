@@ -2,7 +2,7 @@ import React from "react";
 import { useState } from "react/cjs/react.development";
 import "./ExpenseForm.css";
 
-const ExpenseForm = () => {
+const ExpenseForm = (props) => {
   const [enteredTitle, setEnteredTitle] = useState("");
   const [enteredAmount, setEnteredAmount] = useState("");
   const [enteredDate, setEnteredDate] = useState("");
@@ -14,6 +14,8 @@ const ExpenseForm = () => {
 
   const titleChangeHandler = (event) => {
     setEnteredTitle(event.target.value);
+    // Another way to catch the data
+
     // setUserInput({
     //   ...userInput,
     //   enteredTitle: event.target.value,
@@ -43,6 +45,7 @@ const ExpenseForm = () => {
   };
 
   const submitHandler = (event) => {
+    // disable reload page
     event.preventDefault();
 
     const expenseData = {
@@ -52,7 +55,7 @@ const ExpenseForm = () => {
     };
     console.log(expenseData);
 
-    
+    props.onSaveExpenseData(expenseData)
     setEnteredTitle("");
     setEnteredAmount("");
     setEnteredDate("");
@@ -70,7 +73,7 @@ const ExpenseForm = () => {
           ></input>
         </div>
         <div className="new-expense__control">
-          <label>Amout</label>
+          <label>Amount</label>
           <input
             type="number"
             min="0.01"

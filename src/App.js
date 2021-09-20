@@ -30,7 +30,7 @@ const App = () => {
   ];
 
   const addExpenseHandler = expense => {
-    console.log(expense)
+    console.log(expense,"en appjs")
   }
   return (
     <div>
