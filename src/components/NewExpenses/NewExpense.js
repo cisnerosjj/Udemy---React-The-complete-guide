@@ -1,24 +1,40 @@
 import React from "react";
-import "./NewExpense.css"
+import "./NewExpense.css";
 import ExpenseForm from "./ExpenseForm";
+import { useState } from "react/cjs/react.development";
 
 const NewExpense = (props) => {
-    const saveExpenseDataHandler = (enteredExpenseData) => {
-        const expenseData = {
-            ...enteredExpenseData,
-            id: Math.random().toString()
-        }
-        props.onAddExpense(expenseData)
-    }
+  const [isEditing, setEditing] = useState(false);
 
-    return (
-        <div className="new-expense">
-            <ExpenseForm onSaveExpenseData={saveExpenseDataHandler}>
+  const saveExpenseDataHandler = (enteredExpenseData) => {
+    const expenseData = {
+      ...enteredExpenseData,
+      id: Math.random().toString(),
+    };
+    props.onAddExpense(expenseData);
+    setEditing(false);
+  };
 
-            </ExpenseForm>            
+  const startEditingHandler = () => {
+    setEditing(true);
+  };
+  const stopEditingHandler = () => {
+    setEditing(false);
+  };
 
-        </div>
-    )
-}
+  return (
+    <div className="new-expense">
+      {!isEditing && (
+        <button onClick={startEditingHandler}>Add New Expense</button>
+      )}
+      {isEditing && (
+        <ExpenseForm
+          onSaveExpenseData={saveExpenseDataHandler}
+          onCancel={stopEditingHandler}
+        ></ExpenseForm>
+      )}
+    </div>
+  );
+};
 
 export default NewExpense;
